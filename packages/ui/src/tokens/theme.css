@@ -1,0 +1,57 @@
+/* RecallAI Tailwind v4 Core Theme Extension */
+
+@theme {
+    /*
+   * Colors via OKLCH 
+   * Strict adherence to pure blacks and deep indigos.
+   */
+    --color-background: #000000;
+    --color-foreground: oklch(98% 0.01 285);
+
+    --color-muted: oklch(15% 0.02 285);
+    --color-muted-foreground: oklch(65% 0.02 285);
+
+    --color-card: oklch(8% 0.01 285);
+    --color-card-foreground: oklch(98% 0.01 285);
+
+    --color-popover: oklch(10% 0.01 285);
+    --color-popover-foreground: oklch(98% 0.01 285);
+
+    --color-border: oklch(18% 0.02 285);
+    --color-input: oklch(18% 0.02 285);
+
+    --color-primary: oklch(98% 0.01 285);
+    --color-primary-foreground: #000000;
+
+    --color-secondary: oklch(20% 0.03 285);
+    --color-secondary-foreground: oklch(98% 0.01 285);
+
+    --color-accent: oklch(45% 0.15 285);
+    --color-accent-foreground: #ffffff;
+
+    --color-destructive: oklch(40% 0.12 25);
+    --color-destructive-foreground: oklch(98% 0.01 285);
+
+
+    /* 
+   * Typography 
+   */
+    --font-sans: "Inter", "Geist", system-ui, sans-serif;
+
+    /* 
+   * Radius 
+   */
+    --radius-sm: 0.3rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+
+    /*
+   * Z-Index System
+   */
+    --z-nav: 50;
+    --z-modal: 100;
+    --z-cmd: 150;
+    --z-toast: 200;
+}

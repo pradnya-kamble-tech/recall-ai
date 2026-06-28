@@ -1,0 +1,19 @@
+{
+    "extends": "@recallai/tsconfig/base.json",
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+        "types": [
+            "vitest/globals",
+            "@testing-library/jest-dom"
+        ]
+    },
+    "include": [
+        "src",
+        "vitest.setup.ts"
+    ]
+}

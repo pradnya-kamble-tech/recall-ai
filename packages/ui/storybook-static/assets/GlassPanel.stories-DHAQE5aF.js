@@ -1,0 +1,9 @@
+import{j as s}from"./jsx-runtime-BjG_zV1W.js";import{r as v}from"./index-CaMInrNI.js";import{m as x,c as b,a as j}from"./Button-hWE7rJ1T.js";const k=j("rounded-xl backdrop-blur-xl border border-white/10 overflow-hidden",{variants:{intensity:{light:"bg-background/40",medium:"bg-background/20",heavy:"bg-background/10"}},defaultVariants:{intensity:"medium"}}),o=v.forwardRef(({className:t,intensity:h,...y},f)=>s.jsx(x.div,{ref:f,className:b(k({intensity:h,className:t})),...y}));o.displayName="GlassPanel";o.__docgenInfo={description:"",methods:[],displayName:"GlassPanel",composes:["VariantProps"]};const N={title:"Layout/GlassPanel",component:o,parameters:{layout:"centered",backgrounds:{default:"recall-dark"}},decorators:[t=>s.jsx("div",{className:"relative w-96 h-64 p-8 overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center",children:s.jsx(t,{})})],args:{children:s.jsx("div",{className:"p-6 text-white font-medium",children:"Frosted Glass Content"})},argTypes:{intensity:{control:"select",options:["light","medium","heavy"]}}},e={},a={args:{intensity:"light"}},r={args:{intensity:"heavy"}};var n,i,c;e.parameters={...e.parameters,docs:{...(n=e.parameters)==null?void 0:n.docs,source:{originalSource:"{}",...(c=(i=e.parameters)==null?void 0:i.docs)==null?void 0:c.source}}};var d,l,m;a.parameters={...a.parameters,docs:{...(d=a.parameters)==null?void 0:d.docs,source:{originalSource:`{
+  args: {
+    intensity: "light"
+  }
+}`,...(m=(l=a.parameters)==null?void 0:l.docs)==null?void 0:m.source}}};var p,u,g;r.parameters={...r.parameters,docs:{...(p=r.parameters)==null?void 0:p.docs,source:{originalSource:`{
+  args: {
+    intensity: "heavy"
+  }
+}`,...(g=(u=r.parameters)==null?void 0:u.docs)==null?void 0:g.source}}};const _=["Default","Light","Heavy"];export{e as Default,r as Heavy,a as Light,_ as __namedExportsOrder,N as default};
