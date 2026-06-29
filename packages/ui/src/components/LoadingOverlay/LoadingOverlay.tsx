@@ -21,14 +21,14 @@ const loadingOverlayVariants = cva(
 );
 
 export interface LoadingOverlayProps
-    extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof loadingOverlayVariants> {
+    extends VariantProps<typeof loadingOverlayVariants> {
     isVisible?: boolean;
     text?: string;
+    className?: string;
 }
 
 const LoadingOverlay = React.forwardRef<HTMLDivElement, LoadingOverlayProps>(
-    ({ className, position, isVisible = true, text, ...props }, ref) => {
+    ({ className, position, isVisible = true, text }, ref) => {
         return (
             <AnimatePresence>
                 {isVisible && (
@@ -39,7 +39,6 @@ const LoadingOverlay = React.forwardRef<HTMLDivElement, LoadingOverlayProps>(
                         exit={{ opacity: 0 }}
                         transition={{ duration: duration.fast, ease: ease.productive }}
                         className={cn(loadingOverlayVariants({ position, className }))}
-                        {...props}
                     >
                         <motion.div
                             variants={variants.scalePop}

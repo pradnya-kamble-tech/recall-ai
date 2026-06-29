@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../Button/Button";
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 
 const spinnerVariants = cva(
     "animate-spin",
@@ -13,7 +13,7 @@ const spinnerVariants = cva(
                 lg: "h-8 w-8",
                 xl: "h-12 w-12",
             },
-            color: {
+            spinnerColor: {
                 primary: "text-primary",
                 muted: "text-muted-foreground",
                 white: "text-white",
@@ -21,24 +21,30 @@ const spinnerVariants = cva(
         },
         defaultVariants: {
             size: "md",
-            color: "primary",
+            spinnerColor: "primary",
         },
     }
 );
 
 export interface SpinnerProps
-    extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof spinnerVariants> { }
+    extends Omit<React.HTMLAttributes<HTMLDivElement>, "color">,
+    VariantProps<typeof spinnerVariants> {
+    /** Alias for spinnerColor to keep a friendly API */
+    color?: "primary" | "muted" | "white";
+}
 
-const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps & HTMLMotionProps<"div">>(
-    ({ className, size, color, ...props }, ref) => {
+const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
+    ({ className, size, color, spinnerColor, ...props }, ref) => {
+        // Prefer the `color` convenience prop, fall back to `spinnerColor`
+        const resolvedColor = color ?? spinnerColor ?? "primary";
+
         return (
             <motion.div
-                ref={ref}
+                ref={ref as React.Ref<HTMLDivElement>}
                 role="status"
                 aria-label="Loading"
-                className={cn(spinnerVariants({ size, color, className }))}
-                {...props}
+                className={cn(spinnerVariants({ size, spinnerColor: resolvedColor, className }))}
+                {...(props as object)}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
