@@ -77,6 +77,7 @@ export function TopNav({ title = "Memory Space", onMenuClick }: TopNavProps) {
                 <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={() => document.dispatchEvent(new Event("recallai:open-command-palette"))}
                     aria-label="Search memories (⌘K)"
                     className={cn(
                         "hidden sm:flex h-8 items-center gap-2 rounded-lg px-3",
@@ -95,7 +96,11 @@ export function TopNav({ title = "Memory Space", onMenuClick }: TopNavProps) {
 
                 {/* Search icon-only for mobile */}
                 <span className="sm:hidden">
-                    <IconButton icon={Search} label="Search memories" />
+                    <IconButton
+                        icon={Search}
+                        label="Search memories"
+                        onClick={() => document.dispatchEvent(new Event("recallai:open-command-palette"))}
+                    />
                 </span>
 
                 {/* Notifications */}
