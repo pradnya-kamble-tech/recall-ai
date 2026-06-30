@@ -109,14 +109,16 @@ export default function LandingPage() {
           <span className="text-lg font-semibold tracking-tight">RecallAI</span>
         </div>
         <div className="flex items-center gap-3">
+          {/* TODO: Update to /login once auth is implemented */}
           <Link
-            href="/login"
+            href="/dashboard"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors px-4 py-2"
           >
             Sign in
           </Link>
+          {/* TODO: Update to /register once auth is implemented */}
           <Link
-            href="/register"
+            href="/dashboard"
             className="text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
           >
             Get Started
@@ -164,8 +166,9 @@ export default function LandingPage() {
 
         {/* CTA */}
         <motion.div variants={fadeUp} custom={3} className="flex gap-4 mt-10">
+          {/* TODO: Update to /register once auth is implemented */}
           <Link
-            href="/register"
+            href="/dashboard"
             className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-all glow-primary"
           >
             Start for free
