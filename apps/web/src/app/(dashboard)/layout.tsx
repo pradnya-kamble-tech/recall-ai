@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { MotionConfig } from "framer-motion";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { TopNav } from "@/components/layout/TopNav";
+import { CommandPalette } from "@/components/layout/CommandPalette";
+import { NotificationLayer } from "@/components/layout/NotificationLayer";
 
 const TITLE_MAP: Record<string, string> = {
     "/dashboard": "Memory Space",
@@ -49,6 +51,12 @@ export default function DashboardLayout({
                     </main>
                 </div>
             </div>
+
+            {/* Global Command Palette */}
+            <CommandPalette />
+
+            {/* Global Notification Layer */}
+            <NotificationLayer />
         </MotionConfig>
     );
 }
