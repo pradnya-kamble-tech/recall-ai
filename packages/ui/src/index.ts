@@ -1,7 +1,7 @@
 export * from "./tokens/motion/index";
 export * from "./components/Button";
 export * from "./components/Input";
-export * from "./components/Surface";
+export { Surface, surfaceVariants, type SurfaceProps } from "./components/Surface/Surface";
 export * from "./components/GlassPanel";
 export * from "./components/FloatingPanel";
 export * from "./components/Card";
