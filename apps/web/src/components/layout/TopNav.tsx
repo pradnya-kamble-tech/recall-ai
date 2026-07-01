@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Search, Bell, Menu, ChevronRight } from "lucide-react";
+import { Search, Bell, Menu, ChevronRight, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
@@ -46,6 +47,9 @@ function IconButton({
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function TopNav({ title = "Memory Space", onMenuClick }: TopNavProps) {
+    const logout = useAuthStore((state) => state.logout);
+    const user = useAuthStore((state) => state.user);
+
     return (
         <header
             className={cn(
@@ -124,8 +128,11 @@ export function TopNav({ title = "Memory Space", onMenuClick }: TopNavProps) {
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                     )}
                 >
-                    P
+                    {user?.full_name?.charAt(0)?.toUpperCase() || "P"}
                 </motion.button>
+
+                {/* Logout Button */}
+                <IconButton icon={LogOut} label="Log out" onClick={logout} />
             </div>
         </header>
     );

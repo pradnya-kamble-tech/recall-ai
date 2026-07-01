@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     API_V1_PREFIX: str = "/api/v1"
 
     # ── Database ─────────────────────────────────────────────────────────
-    DATABASE_URL: str = "postgresql+asyncpg://recallai:recallai_dev_password@localhost:5432/recallai"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./recallai.db"
 
     # ── Redis ────────────────────────────────────────────────────────────
     REDIS_URL: str = "redis://localhost:6379/0"

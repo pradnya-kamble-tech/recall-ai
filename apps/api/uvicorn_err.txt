@@ -1,0 +1,171 @@
+﻿.\.venv\Scripts\python.exe : 
+Traceback (most recent call last):
+At line:1 char:88
++ ... \apps\api"; 
+.\.venv\Scripts\python.exe -m 
+uvicorn src.main:app --host ...
++                 ~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo          : Not 
+   Specified: (Traceback (most r  
+  ecent call last)::String) [],   
+  RemoteException
+    + FullyQualifiedErrorId : Nat 
+   iveCommandError
+ 
+  File "C:\Users\Shuddhodhan\AppDa
+ta\Local\Programs\Python\Python38\
+lib\runpy.py", line 194, in 
+_run_module_as_main
+    return _run_code(code, 
+main_globals, None,
+  File "C:\Users\Shuddhodhan\AppDa
+ta\Local\Programs\Python\Python38\
+lib\runpy.py", line 87, in 
+_run_code
+    exec(code, run_globals)
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\__main__.py", line 4, in 
+<module>
+    uvicorn.main()
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\cl
+ick\core.py", line 1161, in 
+__call__
+    return self.main(*args, 
+**kwargs)
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\cl
+ick\core.py", line 1082, in main
+    rv = self.invoke(ctx)
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\cl
+ick\core.py", line 1443, in invoke
+    return 
+ctx.invoke(self.callback, 
+**ctx.params)
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\cl
+ick\core.py", line 788, in invoke
+    return __callback(*args, 
+**kwargs)
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\main.py", line 412, in main
+    run(
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\main.py", line 579, in run
+    server.run()
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\server.py", line 65, in run
+    return asyncio.run(self.serve(
+sockets=sockets))
+  File "C:\Users\Shuddhodhan\AppDa
+ta\Local\Programs\Python\Python38\
+lib\asyncio\runners.py", line 44, 
+in run
+    return 
+loop.run_until_complete(main)
+  File "C:\Users\Shuddhodhan\AppDa
+ta\Local\Programs\Python\Python38\
+lib\asyncio\base_events.py", line 
+616, in run_until_complete
+    return future.result()
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\server.py", line 69, in 
+serve
+    await self._serve(sockets)
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\server.py", line 76, in 
+_serve
+    config.load()
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\config.py", line 434, in 
+load
+    self.loaded_app = 
+import_from_string(self.app)
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\.venv\lib\site-packages\uv
+icorn\importer.py", line 19, in 
+import_from_string
+    module = importlib.import_modu
+le(module_str)
+  File "C:\Users\Shuddhodhan\AppDa
+ta\Local\Programs\Python\Python38\
+lib\importlib\__init__.py", line 
+127, in import_module
+    return _bootstrap._gcd_import(
+name[level:], package, level)
+  File "<frozen 
+importlib._bootstrap>", line 
+1014, in _gcd_import
+  File "<frozen 
+importlib._bootstrap>", line 991, 
+in _find_and_load
+  File "<frozen 
+importlib._bootstrap>", line 975, 
+in _find_and_load_unlocked
+  File "<frozen 
+importlib._bootstrap>", line 671, 
+in _load_unlocked
+  File "<frozen 
+importlib._bootstrap_external>", 
+line 848, in exec_module
+  File "<frozen 
+importlib._bootstrap>", line 219, 
+in _call_with_frames_removed
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\src\main.py", line 17, in 
+<module>
+    from src.modules.auth.router 
+import router as auth_router
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\src\modules\auth\router.py
+", line 8, in <module>
+    from 
+src.modules.auth.dependencies 
+import get_current_user
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\src\modules\auth\dependenc
+ies.py", line 9, in <module>
+    from 
+src.modules.auth.repository 
+import UserRepository
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\src\modules\auth\repositor
+y.py", line 6, in <module>
+    class UserRepository:
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\src\modules\auth\repositor
+y.py", line 8, in UserRepository
+    async def get_by_email(db: 
+AsyncSession, email: str) -> User 
+| None:
+TypeError: unsupported operand 
+type(s) for |: 
+'DeclarativeAttributeIntercept' 
+and 'NoneType'

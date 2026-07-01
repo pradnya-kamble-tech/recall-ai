@@ -4,7 +4,7 @@
  * Centralized HTTP client for all frontend-to-backend communication.
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 const API_V1 = `${API_BASE_URL}/api/v1`;
 
 interface RequestOptions extends Omit<RequestInit, "body"> {

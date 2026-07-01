@@ -1,0 +1,143 @@
+# RecallAI — Repository Audit Report
+**Date:** 2026-06-30
+
+---
+
+## 1. Routes
+
+### Routes Implemented
+
+| Route | File | Status |
+|---|---|---|
+| `/` | [app/page.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/app/page.tsx) (Landing Page) | ✅ EXISTS |
+| `/dashboard` | `app/(dashboard)/page.tsx` (Memory Space) | ✅ EXISTS |
+
+### Routes Missing
+
+| Expected Route | Referenced By | Status |
+|---|---|---|
+| `/dashboard/library` | Sidebar, CommandPalette, Dashboard page | ❌ **MISSING** |
+| `/dashboard/ask` | Sidebar, CommandPalette | ❌ **MISSING** |
+| `/dashboard/capture` | Sidebar, CommandPalette, Dashboard page | ❌ **MISSING** |
+| `/dashboard/workspace` | Sidebar, CommandPalette | ❌ **MISSING** |
+| `/dashboard/settings` | Sidebar, CommandPalette | ❌ **MISSING** |
+| `/login` | Landing page nav | ❌ **MISSING** |
+| `/register` | Landing page nav + CTA | ❌ **MISSING** |
+
+---
+
+## 2. Layouts
+
+| Layout | File | Status |
+|---|---|---|
+| Root Layout | [app/layout.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/app/layout.tsx) | ✅ Mounted — provides fonts, dark mode, metadata |
+| Dashboard Layout | `app/(dashboard)/layout.tsx` | ✅ Mounted — renders Sidebar, TopNav, CommandPalette, NotificationLayer |
+
+---
+
+## 3. Navigation — Broken Links
+
+### Sidebar ([Sidebar.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/components/layout/Sidebar.tsx))
+
+| Label | href | Page Exists? |
+|---|---|---|
+| Memory Space | `/dashboard` | ✅ |
+| Knowledge Library | `/dashboard/library` | ❌ **BROKEN** |
+| Ask RecallAI | `/dashboard/ask` | ❌ **BROKEN** |
+| Capture Memory | `/dashboard/capture` | ❌ **BROKEN** |
+| Workspace | `/dashboard/workspace` | ❌ **BROKEN** |
+| Settings | `/dashboard/settings` | ❌ **BROKEN** |
+
+### Command Palette ([navigation.ts](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/lib/commands/plugins/navigation.ts))
+
+| Command | Route | Page Exists? |
+|---|---|---|
+| Memory Space | `/dashboard` | ✅ |
+| Knowledge Library | `/dashboard/library` | ❌ **BROKEN** |
+| Ask RecallAI | `/dashboard/ask` | ❌ **BROKEN** |
+| Capture Memory | `/dashboard/capture` | ❌ **BROKEN** |
+| Workspace | `/dashboard/workspace` | ❌ **BROKEN** |
+| Settings | `/dashboard/settings` | ❌ **BROKEN** |
+
+### Landing Page ([page.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/app/page.tsx))
+
+| Link Text | href | Page Exists? |
+|---|---|---|
+| Sign in | `/login` | ❌ **BROKEN** |
+| Get Started | `/register` | ❌ **BROKEN** |
+| Start for free | `/register` | ❌ **BROKEN** |
+
+---
+
+## 4. Application Shell
+
+| Component | File | Mounted In | Status |
+|---|---|---|---|
+| Sidebar | [components/layout/Sidebar.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/components/layout/Sidebar.tsx) | Dashboard Layout | ✅ |
+| TopNav | [components/layout/TopNav.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/components/layout/TopNav.tsx) | Dashboard Layout | ✅ |
+| CommandPalette | [components/layout/CommandPalette.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/components/layout/CommandPalette.tsx) | Dashboard Layout | ✅ |
+| NotificationLayer | [components/layout/NotificationLayer.tsx](file:///c:/Users/Shuddhodhan/.gemini/antigravity/scratch/recall-ai/apps/web/src/components/layout/NotificationLayer.tsx) | Dashboard Layout | ✅ |
+
+---
+
+## 5. Landing Page
+
+- ✅ Exists at `/`
+- ✅ Features hero, feature grid, footer
+- ❌ "Get Started" and "Sign in" link to `/register` and `/login` which **do not exist**
+- ⚠️ No route from landing page into `/dashboard` (auth pages are missing)
+
+---
+
+## 6. Mock Pages Checklist
+
+| Page | Expected Route | Status |
+|---|---|---|
+| Memory Space | `/dashboard` | ✅ EXISTS |
+| Knowledge Library | `/dashboard/library` | ❌ MISSING |
+| Ask RecallAI | `/dashboard/ask` | ❌ MISSING |
+| Workspace | `/dashboard/workspace` | ❌ MISSING |
+| Search | (no route defined) | ❌ MISSING |
+| Settings | `/dashboard/settings` | ❌ MISSING |
+| Capture Memory | `/dashboard/capture` | ❌ MISSING |
+
+---
+
+## 7. Build Verification
+
+| Check | Result |
+|---|---|
+| `pnpm lint` | ✅ Pass (0 errors, 0 warnings) |
+| `pnpm typecheck` | ✅ Pass |
+| `pnpm build` | ✅ Pass |
+
+---
+
+## 8. Broken Imports
+
+None detected. All imports resolve correctly.
+
+---
+
+## 9. Summary
+
+> **Only 2 out of 9 expected routes physically exist.** The application shell (Sidebar, TopNav, CommandPalette, NotificationLayer) is fully mounted and functional, but **10 out of 11 navigation links point to pages that do not exist.** Next.js will serve its default 404 for all missing routes.
+
+---
+
+## 10. Next Steps
+
+1. **Create placeholder pages** for all 5 missing dashboard routes:
+   - `app/(dashboard)/library/page.tsx`
+   - `app/(dashboard)/ask/page.tsx`
+   - `app/(dashboard)/capture/page.tsx`
+   - `app/(dashboard)/workspace/page.tsx`
+   - `app/(dashboard)/settings/page.tsx`
+
+2. **Fix landing page links:**
+   - Change "Get Started" / "Sign in" to route to `/dashboard` (since auth is not yet implemented)
+   - OR create placeholder `/login` and `/register` pages
+
+3. **Optional:** Create a `/dashboard/search` route if search is planned as a standalone page
+
+4. **Do NOT begin backend, auth, database, or AI work** until all placeholder pages exist and the navigation is fully wired

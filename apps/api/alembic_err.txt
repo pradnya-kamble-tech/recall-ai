@@ -1,0 +1,118 @@
+﻿alembic : Traceback (most recent 
+call last):
+At line:1 char:116
++ ... tivate.ps1; alembic 
+revision --autogenerate -m "Add 
+User auth model"  ...
++                 ~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo          : Not 
+   Specified: (Traceback (most r  
+  ecent call last)::String) [],   
+  RemoteException
+    + FullyQualifiedErrorId : Nat 
+   iveCommandError
+ 
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\runpy.py", line 194, in 
+_run_module_as_main
+    return _run_code(code, 
+main_globals, None,
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\runpy.py", line 87, in 
+_run_code
+    exec(code, run_globals)
+  File "C:\Users\Shuddhodhan\AppDa
+ta\Local\Programs\Python\Python38\
+Scripts\alembic.exe\__main__.py", 
+line 7, in <module>
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\alembic\config.p
+y", line 641, in main
+    CommandLine(prog=prog).main(ar
+gv=argv)
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\alembic\config.p
+y", line 631, in main
+    self.run_cmd(cfg, options)
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\alembic\config.p
+y", line 608, in run_cmd
+    fn(
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\alembic\command.
+py", line 236, in revision
+    script_directory.run_env()
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\alembic\script\b
+ase.py", line 583, in run_env
+    
+util.load_python_file(self.dir, 
+"env.py")
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\alembic\util\pyf
+iles.py", line 95, in 
+load_python_file
+    module = 
+load_module_py(module_id, path)
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\alembic\util\pyf
+iles.py", line 113, in 
+load_module_py
+    
+spec.loader.exec_module(module)  
+# type: ignore
+  File "<frozen 
+importlib._bootstrap_external>", 
+line 848, in exec_module
+  File "<frozen 
+importlib._bootstrap>", line 219, 
+in _call_with_frames_removed
+  File "C:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\alembic\env.py", line 14, 
+in <module>
+    from src.core.config import 
+get_settings
+  File "c:\Users\Shuddhodhan\.gemi
+ni\antigravity\scratch\recall-ai\a
+pps\api\src\core\config.py", line 
+12, in <module>
+    class Settings(BaseSettings):
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\pydantic\_intern
+al\_model_construction.py", line 
+114, in __new__
+    private_attributes = 
+inspect_namespace(
+  File "c:\users\shuddhodhan\appda
+ta\local\programs\python\python38\
+lib\site-packages\pydantic\_intern
+al\_model_construction.py", line 
+427, in inspect_namespace
+    raise PydanticUserError(
+pydantic.errors.PydanticUserError:
+ A non-annotated attribute was 
+detected: `List = typing.List`. 
+All model fields require a type 
+annotation; if `List` is not 
+meant to be a field, you may be 
+able to resolve this error by 
+annotating it as a `ClassVar` or 
+updating 
+`model_config['ignored_types']`.
+
+For further information visit http
+s://errors.pydantic.dev/2.9/u/mode
+l-field-missing-annotation
