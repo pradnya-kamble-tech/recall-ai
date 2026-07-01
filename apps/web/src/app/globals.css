@@ -4,6 +4,7 @@
 /* 
  * Apply base background and foreground from the extracted UI token theme
  */
+
 @layer base {
 
   *,
