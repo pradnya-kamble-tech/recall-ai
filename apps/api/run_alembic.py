@@ -7,3 +7,9 @@ if __name__ == "__main__":
     else:
         sys.argv = ["alembic", "revision", "--autogenerate", "-m", "Init Auth"]
     main()
+
+
+
+
+
+
