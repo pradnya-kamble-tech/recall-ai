@@ -1,6 +1,6 @@
 # RecallAI
 
-**AI Knowledge Operating System**
+AI Knowledge Operating System
 
 RecallAI transforms meetings, conversations, documents, and decisions into a permanent, searchable organizational memory. Instead of simply summarizing meetings, RecallAI understands them — extracting knowledge, connecting information, and allowing instant retrieval via AI.
 
