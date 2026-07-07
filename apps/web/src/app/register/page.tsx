@@ -76,8 +76,8 @@ export default function RegisterPage() {
             login(user, data.access_token);
 
             router.push("/dashboard");
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : String(err));
         } finally {
             setIsLoading(false);
         }
