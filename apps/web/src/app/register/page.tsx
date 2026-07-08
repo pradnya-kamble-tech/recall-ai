@@ -32,7 +32,7 @@ export default function RegisterPage() {
 
         try {
             // First Register
-            const regRes = await fetch("http://127.0.0.1:8000/api/v1/auth/register", {
+            const regRes = await fetch("http://localhost:8000/api/v1/auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password, full_name: fullName }),
@@ -44,7 +44,7 @@ export default function RegisterPage() {
             }
 
             // Then Login seamlessly
-            const loginRes = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+            const loginRes = await fetch("http://localhost:8000/api/v1/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams({ username: email, password }),
@@ -60,7 +60,7 @@ export default function RegisterPage() {
             document.cookie = `auth-token=${data.access_token}; path=/; max-age=86400; SameSite=Lax`;
 
             // Fetch real user object
-            const meResponse = await fetch("http://127.0.0.1:8000/api/v1/auth/me", {
+            const meResponse = await fetch("http://localhost:8000/api/v1/auth/me", {
                 headers: {
                     Authorization: `Bearer ${data.access_token}`
                 }

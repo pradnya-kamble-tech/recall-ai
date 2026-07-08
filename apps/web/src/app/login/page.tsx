@@ -32,7 +32,7 @@ export default function LoginPage() {
         try {
             // NOTE: In Phase 2, this calls FastAPI /auth/login.
             // Using a simulated local network delay to match scope requests.
-            const response = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+            const response = await fetch("http://localhost:8000/api/v1/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams({ username: email, password }),
@@ -49,7 +49,7 @@ export default function LoginPage() {
             document.cookie = `auth-token=${data.access_token}; path=/; max-age=86400; SameSite=Lax`;
 
             // Fetch real user object
-            const meResponse = await fetch("http://127.0.0.1:8000/api/v1/auth/me", {
+            const meResponse = await fetch("http://localhost:8000/api/v1/auth/me", {
                 headers: {
                     Authorization: `Bearer ${data.access_token}`
                 }

@@ -15,7 +15,7 @@ from src.core.config import get_settings
 
 # --- Feature Module Routers ---
 from src.modules.auth.router import router as auth_router
-from src.modules.users.router import router as users_router
+# from src.modules.users.router import router as users_router
 # from src.modules.meetings.router import router as meetings_router
 
 settings = get_settings()
@@ -56,7 +56,7 @@ def create_app() -> FastAPI:
 
     # ── Module Routers ───────────────────────────────────────────────────
     app.include_router(auth_router, prefix=f"{settings.API_V1_PREFIX}/auth", tags=["Auth"])
-    app.include_router(users_router, prefix=f"{settings.API_V1_PREFIX}/users", tags=["Users"])
+    # app.include_router(users_router, prefix=f"{settings.API_V1_PREFIX}/users", tags=["Users"])
     # app.include_router(meetings_router, prefix=f"{settings.API_V1_PREFIX}/meetings", tags=["Meetings"])
 
     return app
