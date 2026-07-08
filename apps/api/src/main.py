@@ -12,6 +12,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
 from src.core.config import get_settings
+from src.core.database import engine, Base
+
+# Import models so their tables are registered with Base.metadata
+from src.modules.auth.models import User  # noqa: F401
 
 # --- Feature Module Routers ---
 from src.modules.auth.router import router as auth_router
@@ -24,9 +28,13 @@ settings = get_settings()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan — startup and shutdown events."""
-    logger.info(f"🚀 Starting {settings.APP_NAME} [{settings.ENVIRONMENT}]")
+    # Auto-create tables on startup (idempotent — safe to run every time)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    logger.info(f"Database tables verified/created.")
+    logger.info(f"Starting {settings.APP_NAME} [{settings.ENVIRONMENT}]")
     yield
-    logger.info(f"👋 Shutting down {settings.APP_NAME}")
+    logger.info(f"Shutting down {settings.APP_NAME}")
 
 
 def create_app() -> FastAPI:
