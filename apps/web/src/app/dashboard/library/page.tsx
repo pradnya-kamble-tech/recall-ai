@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -57,6 +57,8 @@ export default function LibraryPage() {
     const [activeFilter, setActiveFilter] = React.useState<FilterCategory>("All");
     const [sortBy, setSortBy] = React.useState<SortOption>("Newest");
     const [isLoading, setIsLoading] = React.useState(true);
+    // const [viewMode, setViewMode] = React.useState<"grid" | "list">("grid");
+
 
     // Simulate loading state
     React.useEffect(() => {
@@ -131,10 +133,10 @@ export default function LibraryPage() {
                     <div className="relative flex-1 w-full">
                         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input
-                            placeholder="Search memories..."
-                            className="pl-10 h-10 w-full bg-black/20 border-white/[0.08] focus-visible:ring-primary/30 transition-all shadow-inner hover:border-white/[0.15]"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
+                            placeholder="Search documents, recordings, notes..."
+                            className="pl-10"
                         />
                     </div>
                     <div className="flex items-center gap-3 w-full xl:w-auto overflow-x-auto pb-2 xl:pb-0 hide-scrollbar">
@@ -229,64 +231,66 @@ export default function LibraryPage() {
                                     whileHover={{ y: -4, transition: { duration: 0.2 } }}
                                     className="group h-full"
                                 >
-                                    <Card className="h-full flex flex-col border-white/[0.06] bg-black/40 hover:bg-black/60 transition-colors cursor-pointer overflow-hidden relative shadow-sm hover:shadow-md hover:border-white/[0.12]">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                    <Link href={`/dashboard/library/${doc.id}`}>
+                                        <Card className="h-full flex flex-col border-white/[0.06] bg-black/40 hover:bg-black/60 transition-colors cursor-pointer overflow-hidden relative shadow-sm hover:shadow-md hover:border-white/[0.12]">
+                                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                                        <CardHeader className="pb-3 flex-none relative z-10">
-                                            <div className="flex items-center justify-between mb-3">
-                                                <span className="inline-flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-widest text-muted-foreground/80 px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.04]">
-                                                    {getCategoryIcon(doc.category)}
-                                                    {doc.category}
-                                                </span>
-
-                                                {/* Hover actions */}
-                                                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all translate-x-2 group-hover:translate-x-0">
-                                                    <button
-                                                        className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
-                                                        title="Open"
-                                                    >
-                                                        <ExternalLink className="h-4 w-4" />
-                                                    </button>
-                                                    <button
-                                                        className="text-muted-foreground hover:text-primary transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
-                                                        title="Favorite"
-                                                    >
-                                                        <Heart className={cn("h-4 w-4", doc.favorite && "fill-primary text-primary")} />
-                                                    </button>
-                                                    <button
-                                                        className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
-                                                        title="More"
-                                                    >
-                                                        <MoreHorizontal className="h-4 w-4" />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <CardTitle className="text-base font-semibold leading-tight group-hover:text-primary transition-colors line-clamp-2">
-                                                {doc.title}
-                                            </CardTitle>
-                                        </CardHeader>
-
-                                        <CardContent className="flex-1 flex flex-col justify-between relative z-10">
-                                            <p className="text-sm text-muted-foreground line-clamp-2 mb-4 group-hover:text-muted-foreground/80 transition-colors">
-                                                {doc.summary}
-                                            </p>
-
-                                            <div className="flex items-center justify-between mt-auto pt-2 border-t border-white/[0.03]">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="h-6 w-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-[10px] font-bold border border-primary/20">
-                                                        {doc.owner.initials}
-                                                    </div>
-                                                    <span className="text-xs font-medium text-foreground/80">
-                                                        {doc.owner.name}
+                                            <CardHeader className="pb-3 flex-none relative z-10">
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <span className="inline-flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-widest text-muted-foreground/80 px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.04]">
+                                                        {getCategoryIcon(doc.category)}
+                                                        {doc.category}
                                                     </span>
+
+                                                    {/* Hover actions */}
+                                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all translate-x-2 group-hover:translate-x-0">
+                                                        <button
+                                                            className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
+                                                            title="Open"
+                                                        >
+                                                            <ExternalLink className="h-4 w-4" />
+                                                        </button>
+                                                        <button
+                                                            className="text-muted-foreground hover:text-primary transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
+                                                            title="Favorite"
+                                                        >
+                                                            <Heart className={cn("h-4 w-4", doc.favorite && "fill-primary text-primary")} />
+                                                        </button>
+                                                        <button
+                                                            className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
+                                                            title="More"
+                                                        >
+                                                            <MoreHorizontal className="h-4 w-4" />
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-                                                    <Clock className="h-3 w-3" />
-                                                    {doc.date}
+                                                <CardTitle className="text-base font-semibold leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                                                    {doc.title}
+                                                </CardTitle>
+                                            </CardHeader>
+
+                                            <CardContent className="flex-1 flex flex-col justify-between relative z-10">
+                                                <p className="text-sm text-muted-foreground line-clamp-2 mb-4 group-hover:text-muted-foreground/80 transition-colors">
+                                                    {doc.summary}
+                                                </p>
+
+                                                <div className="flex items-center justify-between mt-auto pt-2 border-t border-white/[0.03]">
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="h-6 w-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-[10px] font-bold border border-primary/20">
+                                                            {doc.owner.initials}
+                                                        </div>
+                                                        <span className="text-xs font-medium text-foreground/80">
+                                                            {doc.owner.name}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                                                        <Clock className="h-3 w-3" />
+                                                        {doc.date}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
+                                            </CardContent>
+                                        </Card>
+                                    </Link>
                                 </motion.div>
                             ))}
                         </AnimatePresence>
