@@ -1,6 +1,8 @@
 "use client";
+import { uploadDocument } from "@/lib/api/upload";
 import Link from "next/link";
 import * as React from "react";
+import { getDocuments } from "@/lib/api/documents";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Search,
@@ -27,9 +29,17 @@ import {
     Skeleton,
 } from "@recallai/ui";
 import { cn } from "@/lib/utils";
-import { mockMemories, MemoryCategory, FilterCategory } from "@/lib/mock/memories";
 
-const filters: FilterCategory[] = ["All", "Meetings", "Documents", "Notes", "Images", "Videos"];
+type Document = {
+    id: string;
+    title: string;
+    summary: string;
+    owner: string;
+    date: string;
+};
+
+type FilterCategory = "All";
+const filters: FilterCategory[] = ["All"];
 const sortOptions = ["Newest", "Oldest", "Recently Viewed", "Alphabetical"] as const;
 type SortOption = typeof sortOptions[number];
 
@@ -43,55 +53,63 @@ const itemVariants = {
     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } },
 };
 
-function getCategoryIcon(cat: MemoryCategory) {
-    if (cat === "Meeting" || cat === "Customer Call") return <Users className="h-3.5 w-3.5" />;
-    if (cat === "Document" || cat === "Transcript" || cat === "Research" || cat === "Planning" || cat === "Design Review") return <FileText className="h-3.5 w-3.5" />;
-    if (cat === "Video") return <Video className="h-3.5 w-3.5" />;
-    if (cat === "Image") return <ImageIcon className="h-3.5 w-3.5" />;
-    if (cat === "Note") return <Folder className="h-3.5 w-3.5" />;
-    return <FileText className="h-3.5 w-3.5" />;
-}
-
 export default function LibraryPage() {
     const [search, setSearch] = React.useState("");
     const [activeFilter, setActiveFilter] = React.useState<FilterCategory>("All");
     const [sortBy, setSortBy] = React.useState<SortOption>("Newest");
+    const [documents, setDocuments] = React.useState<Document[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
-    // const [viewMode, setViewMode] = React.useState<"grid" | "list">("grid");
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
 
+    // const [viewMode, setViewMode] = React.useState<"grid" | "list">("grid");
 
     // Simulate loading state
     React.useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 800);
-        return () => clearTimeout(timer);
+        async function loadDocuments() {
+            try {
+                const data = await getDocuments();
+                setDocuments(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        loadDocuments();
     }, []);
 
-    const filteredMemories = React.useMemo(() => {
-        let result = mockMemories;
+    async function handleUpload(
+        event: React.ChangeEvent<HTMLInputElement>
+    ) {
+        const file = event.target.files?.[0];
 
-        if (activeFilter !== "All") {
-            result = result.filter(m => m.filterGroup === activeFilter);
+        if (!file) return;
+
+        try {
+            await uploadDocument(file);
+
+            const docs = await getDocuments();
+
+            setDocuments(docs);
+        } catch (err) {
+            console.error(err);
         }
+    }
+    const filteredMemories = React.useMemo(() => {
+        let result = documents;
 
         if (search.trim()) {
             const q = search.toLowerCase();
             result = result.filter(m =>
                 m.title.toLowerCase().includes(q) ||
                 m.summary.toLowerCase().includes(q) ||
-                m.owner.name.toLowerCase().includes(q)
+                m.owner.toLowerCase().includes(q)
             );
         }
 
-        // Sorting
+        // Sorting - only alphabetical works without timestamps
         result = [...result].sort((a, b) => {
             switch (sortBy) {
-                case "Newest":
-                    return b.timestamp - a.timestamp;
-                case "Oldest":
-                    return a.timestamp - b.timestamp;
-                case "Recently Viewed":
-                    // Fake for mock: slightly randomize or just different sort
-                    return (b.timestamp * 1.5) - (a.timestamp * 1.2);
                 case "Alphabetical":
                     return a.title.localeCompare(b.title);
                 default:
@@ -100,7 +118,7 @@ export default function LibraryPage() {
         });
 
         return result;
-    }, [search, activeFilter, sortBy]);
+    }, [search, activeFilter, sortBy, documents]);
 
     return (
         <motion.div
@@ -115,15 +133,19 @@ export default function LibraryPage() {
                     <div className="flex items-center gap-3">
                         <h1 className="text-3xl font-bold tracking-tight">Knowledge Library</h1>
                         <span className="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                            {mockMemories.length} Memories
+                            {documents.length} Memories
                         </span>
                     </div>
                     <p className="text-muted-foreground text-sm max-w-xl">
                         Organize and search your team&apos;s memory. Find documents, meetings, and insights instantly.
                     </p>
                 </div>
-                <Button className="shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm border border-primary-foreground/10">
-                    <Upload className="h-4 w-4 mr-2" /> Upload Memory
+                <Button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm border border-primary-foreground/10"
+                >
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload Memory
                 </Button>
             </motion.div>
 
@@ -238,8 +260,8 @@ export default function LibraryPage() {
                                             <CardHeader className="pb-3 flex-none relative z-10">
                                                 <div className="flex items-center justify-between mb-3">
                                                     <span className="inline-flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-widest text-muted-foreground/80 px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.04]">
-                                                        {getCategoryIcon(doc.category)}
-                                                        {doc.category}
+                                                        <FileText className="h-3.5 w-3.5" />
+                                                        Document
                                                     </span>
 
                                                     {/* Hover actions */}
@@ -254,7 +276,7 @@ export default function LibraryPage() {
                                                             className="text-muted-foreground hover:text-primary transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
                                                             title="Favorite"
                                                         >
-                                                            <Heart className={cn("h-4 w-4", doc.favorite && "fill-primary text-primary")} />
+                                                            <Heart className="h-4 w-4" />
                                                         </button>
                                                         <button
                                                             className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-md hover:bg-white/[0.06]"
@@ -277,10 +299,10 @@ export default function LibraryPage() {
                                                 <div className="flex items-center justify-between mt-auto pt-2 border-t border-white/[0.03]">
                                                     <div className="flex items-center gap-2">
                                                         <div className="h-6 w-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-[10px] font-bold border border-primary/20">
-                                                            {doc.owner.initials}
+                                                            {doc.owner.charAt(0)}
                                                         </div>
                                                         <span className="text-xs font-medium text-foreground/80">
-                                                            {doc.owner.name}
+                                                            {doc.owner}
                                                         </span>
                                                     </div>
                                                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
@@ -296,7 +318,14 @@ export default function LibraryPage() {
                         </AnimatePresence>
                     </div>
                 )}
-            </motion.div>
-        </motion.div>
+            </motion.div>pnpm dev
+            <input
+                ref={fileInputRef}
+                type="file"
+                hidden
+                onChange={handleUpload}
+            />
+
+        </motion.div >
     );
 }

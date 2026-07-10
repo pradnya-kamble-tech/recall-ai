@@ -5,7 +5,9 @@ Centralized settings management using Pydantic Settings.
 All configuration is loaded from environment variables or .env files.
 """
 
+from __future__ import annotations
 from functools import lru_cache
+from typing import List
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -42,7 +44,7 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # ── CORS ─────────────────────────────────────────────────────────────
-    CORS_ORIGINS: list[str] = [
+    CORS_ORIGINS: List[str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ]
