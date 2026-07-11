@@ -6,6 +6,7 @@ RecallAI transforms meetings, conversations, documents, and decisions into a per
 
 ## Architecture
 
+
 | Layer    | Technology                                  |
 |----------|---------------------------------------------|
 | Frontend | Next.js 16, React 19, TypeScript, Tailwind v4 |
