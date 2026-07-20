@@ -1,0 +1,2 @@
+src/app/dashboard/capture/page.tsx(191,46): error TS2322: Type '{ size: "sm"; isAnimated: true; }' is not assignable to type 'IntrinsicAttributes & Omit<RecallOrbProps & AttributesWithoutMotionProps<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> & MotionProps, "ref"> & RefAttributes<...>'.
+  Property 'isAnimated' does not exist on type 'IntrinsicAttributes & Omit<RecallOrbProps & AttributesWithoutMotionProps<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> & MotionProps, "ref"> & RefAttributes<...>'. Did you mean 'animate'?

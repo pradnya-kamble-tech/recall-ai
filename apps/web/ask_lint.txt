@@ -1,0 +1,17 @@
+
+C:\Users\Shuddhodhan\.gemini\antigravity\scratch\recall-ai\apps\web\src\app\dashboard\ask\page.tsx
+  78:17  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Shuddhodhan\.gemini\antigravity\scratch\recall-ai\apps\web\src\app\dashboard\ask\page.tsx:78:17
+  76 |
+  77 |         const newMsg: ChatMessage = {
+> 78 |             id: Date.now().toString(),
+     |                 ^^^^^^^^^^ Cannot call impure function
+  79 |             role: "user",
+  80 |             content: text,
+  81 |             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })  react-hooks/purity
+
+✖ 1 problem (1 error, 0 warnings)
+
